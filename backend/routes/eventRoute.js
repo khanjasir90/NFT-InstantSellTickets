@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { authenticateToken } = require('../utils/jwt');
 
 const {
     setEvent,
@@ -9,6 +10,6 @@ const {
 
 router.post('/events', setEvent);
 router.get('/events', getAllEvents);
-router.get('/events/:id', getSingleEvent);
+router.get('/events/:id', authenticateToken, getSingleEvent);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/User');
+const { generateAccessToken, authenticateToken } = require('../utils/jwt');
 
 const register = async(req,res,next) => {
     const { email, username, password, cpassword } = req.body;
@@ -56,6 +57,7 @@ const register = async(req,res,next) => {
 
 const login = async(req,res,next) => {
     const {username, password} = req.body;
+    const token = generateAccessToken(req.body);
 
     const user = await User.findOne({
         username: username
@@ -79,6 +81,7 @@ const login = async(req,res,next) => {
 
     return res.status(200).json({
         msg: 'user login successfully',
+        token: token,
         data: user
     });
 

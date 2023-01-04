@@ -50,7 +50,7 @@ const getAllEvents = async(req,res,next) => {
 }
 
 const getSingleEvent = async(req,res,next) => {
-    const { id } = req.param;
+    const { id } = req.params;
     const event = await Event.findById(id);
     return res.status(200).json({
         msg: '',
