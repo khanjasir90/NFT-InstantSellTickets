@@ -1,22 +1,24 @@
 const express = require('express');
-const app = express();
 require('dotenv').config();
 require('./db_config')
-const cors = require('cors');
+var cors = require("cors");
+
+const app = express();
 
 const corsOptions = {
-    origin: '*',
-    optionSuccessStatus: 200
+    origin: "http://localhost:3000",
+    optionSuccessStatus: 200,
 }
 
+app.use(cors(corsOptions));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors());
 
 const eventRouter = require('./routes/eventRoute');
 const userRouter  = require('./routes/userRoute');
 const homeRouter = require('./routes/homeRoute');
 
-app.use(cors(corsOptions));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
 
 app.use('/api', eventRouter);
 app.use('/api', userRouter);
