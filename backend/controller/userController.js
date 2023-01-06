@@ -1,42 +1,46 @@
 const mongoose = require('mongoose');
 const User = require('../models/User');
+const bcrypt = require("bcrypt")
 const { generateAccessToken, authenticateToken } = require('../utils/jwt');
 
 const register = async(req,res,next) => {
     const { email, username, password, cpassword } = req.body;
-    const isEmailExist = await User.find({
+    const isEmailExist = await User.findOne({
         email: email
     });
-
-    if(isEmailExist !== null) {
+    
+    if(isEmailExist) {
         return res.status(400).json({
             msg: 'email already exist',
             data: ''
         });
     }
 
-    const isUsernameExist = await User.find({
+    const isUsernameExist = await User.findOne({
         username: username
     });
 
-    if(isUsernameExist !== null) {
+    if(isUsernameExist) {
         return res.status(400).json({
             msg : 'username already exists',
             data: ''
         });
     }
-
-    if(password !== cpassword) {
+    console.log(password)
+    console.log(cpassword)
+    if(password != cpassword) {
         return res.status(400).json({
             msg: 'both password dont match',
-            data: ''
+            data: req.body
         })
     }
+
+    hashed_password = await bcrypt.hash(password, 10);
 
     const userInserted = new User({
         email: email,
         username: username,
-        password: password
+        password: hashed_password
     })
 
     try {
@@ -72,7 +76,9 @@ const login = async(req,res,next) => {
         })
     }
 
-    if(user.password !== password){
+    hashed_password = await bcrypt.compare(password, user.password)
+
+    if(!hashed_password){
         return res.status(400).json({
             msg: 'wrong username or password',
             data: ''
