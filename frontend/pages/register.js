@@ -11,6 +11,7 @@ const Register = () => {
         username: "",
         email: "",
         password: "",
+        // cpassword: "",
       });
 
       const InputChange = (event) => {
@@ -69,11 +70,14 @@ const Register = () => {
                                 type="password"
                                 className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 name="cpassword"
+                                // onChange={InputChange}
                                 onChange={(e) => {
                                     if(e.target.value !== data.password) setWarning(true);
                                     else setWarning(false);                                    
                                 }}
+                                // value={data.cpassword}
                                 placeholder="Confirm Password"
+                                
                               />
                                 {warning && (
                                     <p className="text-alert">

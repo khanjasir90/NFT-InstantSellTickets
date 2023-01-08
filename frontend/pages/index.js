@@ -1,11 +1,9 @@
-import Head from 'next/head'
-import Image from 'next/image'
-// import detectEthereumProvider from '@metamask/detect-provider'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import styles from '../styles/Home.module.css'
 import Nav from '../components/nav';
 import Card from '../components/card';
 import Footer from '../components/footer';
+
 export default function Home() {
   return (
     <div className='w-full h-full'>

@@ -5,7 +5,12 @@ function Card ()
     return (
         <div className="mt-8 ml-9 flex">
             <div className="flex flex-col box-border flex h-80 w-60 p-2 shadow-xl border-black rounded-3xl bg-white">                   
-                <Image className="object-fill border rounded-3xl hover:object-cover" src={"/lufy.jpg"} height="220" width="230"/>
+                <Image 
+                    className="object-fill border rounded-3xl hover:object-cover" 
+                    src={"/lufy.jpg"} 
+                    height="220" 
+                    width="230"
+                    alt="event image"/>
                 <div className='mt-3 flex'>
                     <p>BookMyShow Event</p>
                     <div className='border h-auto w-auto border-black ml-10 p-0 rounded-md'>

@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { notificationAction } from "./notificationSlice";
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     loggedIn: false,
     userData: {},
+    username: "",
     email: "",
     user_id: "",
   },
@@ -14,9 +14,11 @@ const authSlice = createSlice({
       state.loggedIn = true;
       state.userData = action.payload.userData;
       // store token in local storage
-      localStorage.setItem("userData", (action.payload.userData.email));
+      window.localStorage.setItem("userData", (action.payload.userData.username));
       state.username = action.payload.userData.username;
+      state.email = action.payload.userData.email;
       state.user_id = action.payload.userData._id;
+
     },
     logout: (state, action) => {
       state.loggedIn = false;
@@ -29,12 +31,6 @@ export const authActions = authSlice.actions;
 
 export const signup = (data) => {
     return async (dispatch) => {
-      // dispatch(
-      //   notificationAction.enableNotification({
-      //     message: "Registering User !",
-      //     heading: "Pending",
-      //   })
-      // );
       console.log(data);
       console.log("pending")
       let response = await fetch("http://localhost:5000/api/user/register", {
@@ -70,6 +66,7 @@ export const signup = (data) => {
         if (!response.ok) {
             console.log("Failed");
         } else {
+            dispatch(authActions.login({ userData: json.data }))
             console.log("Success");
         }
     }
