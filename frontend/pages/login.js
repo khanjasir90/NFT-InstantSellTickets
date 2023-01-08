@@ -16,8 +16,8 @@ const Login = () => {
   const handleSignIn = (e) => {
     e.preventDefault();
     dispatch(signin(data));
-    // navigate("/");
-    // hideSignIn();
+    Router.push('/')     
+
   };
 
   const InputChange = (event) => {
@@ -29,11 +29,8 @@ const Login = () => {
     <div>
       <section className="h-full gradient-form bg-gray-200 md:h-screen">
         <div className="container py-12 px-6 h-full">
-          <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
-            {/* <div className="w-10/12"> */}
-              <div className="block bg-white shadow-lg rounded-lg">
-                {/* <div className="lg:flex lg:flex-wrap g-0"> */}
-                  {/* <div className="lg:w-6/12 px-4 md:px-0"> */}
+          <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">            
+              <div className="block bg-white shadow-lg rounded-lg">                
                     <div className="md:p-12 md:mx-6">
                       <form>
                         <p className="mb-4">Please login to your account</p>
@@ -62,7 +59,10 @@ const Login = () => {
                           <button
                             className="inline-block px-6 py-2.5 text-black font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3 bg-gradient-to-r from-indigo-500 to-indigo-200"
                             type="submit"
-                            onClick={(e) => handleSignIn(e)}
+                            onClick={(e) => {                              
+                              handleSignIn(e)                                                      
+                            }}
+
                             data-mdb-ripple="true"
                             data-mdb-ripple-color="light"
                             
@@ -90,10 +90,7 @@ const Login = () => {
                   </div>
                   
                 </div>
-              </div>
-            {/* </div>
-          </div>
-        </div> */}
+              </div>            
       </section>
     </div>
   );
